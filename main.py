@@ -22,7 +22,7 @@ bot = commands.Bot(command_prefix='!', intents=intents)
 
 @bot.event
 async def on_ready():
-    print(f"We are ready to go in, {bot.user.name}")
+    print(f"{bot.user.name} is initializing...")
 
 @bot.event
 async def on_member_join(member):
@@ -40,7 +40,7 @@ async def on_message(message):
     await bot.process_commands(message) ## allows to continue handing message in the server by anyone else << 
 
 
-@bot.command
+@bot.command()
 async def avatar(ctx, member: discord.Member = None):
     ## getting who the member is and url
     member = member or ctx.author
@@ -54,11 +54,5 @@ async def avatar(ctx, member: discord.Member = None):
     embed.set_image(url=avatar_url)
 
     await ctx.send(embed=embed)
-
-
-
-
-
-
 
 bot.run(token, log_handler=handler, log_level=logging.DEBUG)
