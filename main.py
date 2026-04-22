@@ -8,6 +8,13 @@ load_dotenv() ## loading env and token
 token = os.getenv('DISCORD_TOKEN')
 BLACKLIST = os.getenv('BLACKLIST').split(',') # get racist word filter WORDS
 
+## Channels
+WELCOME_CHANNEL = int(os.getenv('WELCOME_CHANNEL'))
+
+
+
+
+
 handler = logging.FileHandler(filename='discord.log', encoding='utf-8', mode='w')
 intents = discord.Intents.default()
 intents.message_content = True
@@ -25,7 +32,9 @@ async def on_ready():
 ## if someone joins the server
 @bot.event
 async def on_member_join(member):
-    await member.send(f"Welcome to the server {member.name}")
+    channel = bot.get_channel(WELCOME_CHANNEL)
+    if channel:
+        await channel.send(f"Welcome to the server {member.mention}")
 
 
 ## user messaging
