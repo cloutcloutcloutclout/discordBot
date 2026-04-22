@@ -34,7 +34,7 @@ async def on_ready():
 async def on_member_join(member):
     channel = bot.get_channel(WELCOME_CHANNEL)
     if channel:
-        await channel.send(f"Welcome to the server {member.mention}")
+        await channel.send(f"Welcome to the server {member.mention}!")
 
 
 ## user messaging
@@ -50,7 +50,7 @@ async def on_message(message):
 
     if any(word in content for word in BLACKLIST):
         await message.delete()
-        await message.channel.send(f"{message.author.mention}, you are unable to send racist remarks on this server")
+        await message.channel.send(f"{message.author.mention}, racist remarks are blacklisted.")
 
     await bot.process_commands(message) ## allows to continue handing message in the server by anyone else << 
 
