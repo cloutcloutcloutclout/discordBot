@@ -1,22 +1,20 @@
-## importing key dependencies
 import discord
 from discord.ext import commands
 import logging
 from dotenv import load_dotenv
 import os
 
-## loading token
-load_dotenv()
+load_dotenv() ## loading env and token
 token = os.getenv('DISCORD_TOKEN')
+BLACKLIST = os.getenv('BLACKLIST').split(',') # get racist word filter WORDS
 
-## handler + intents
 handler = logging.FileHandler(filename='discord.log', encoding='utf-8', mode='w')
 intents = discord.Intents.default()
 intents.message_content = True
-intents.members = True
+intents.members = True ## handler + intents
 
-## Bot
-bot = commands.Bot(command_prefix='$', intents=intents)
+bot = commands.Bot(command_prefix='$', intents=intents) ## Bot
+
 
 ## bot initialize
 @bot.event
@@ -39,17 +37,11 @@ async def on_message(message):
         return
     
     # racism filter {progress}
-    if "shit" in message.content.lower():
+    content = message.content.lower()
+
+    if any(word in content for word in BLACKLIST):
         await message.delete()
-        await message.channel.send(f"{message.author.mention} swear is filtered")
-
-
-
-
-
-
-
-
+        await message.channel.send(f"{message.author.mention}, you are unable to send racist remarks on this server")
 
     await bot.process_commands(message) ## allows to continue handing message in the server by anyone else << 
 
