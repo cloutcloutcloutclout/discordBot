@@ -13,6 +13,7 @@ WELCOME_CHANNEL = int(os.getenv('WELCOME_CHANNEL'))
 
 
 
+## Money 
 
 
 handler = logging.FileHandler(filename='discord.log', encoding='utf-8', mode='w')
