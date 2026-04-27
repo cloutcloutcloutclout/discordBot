@@ -10,6 +10,7 @@ BLACKLIST = os.getenv('BLACKLIST').split(',') # get racist word filter WORDS
 
 ## Channels
 WELCOME_CHANNEL = int(os.getenv('WELCOME_CHANNEL'))
+LEAVE_CHANNEL = int(os.getenv('LEAVE_CHANNEL'))
 
 
 
@@ -37,6 +38,14 @@ async def on_member_join(member):
     if channel:
         await channel.send(f"Welcome to the server {member.mention}!")
 
+@bot.event
+async def on_member_remove(member):
+    # print(f"[DEBUG] Member left: {member.name}")  # Does the event fire at all?
+    channel = bot.get_channel(LEAVE_CHANNEL)
+    ## print(f"[DEBUG] Channel found: {channel}")     # Is the channel being found?
+    ## print(f"[DEBUG] Leave channel ID: {LEAVE_CHANNEL}")
+    if channel:
+        await channel.send(f"{member.name} has left the server")
 
 ## user messaging
 @bot.event
