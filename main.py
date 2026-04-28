@@ -31,7 +31,7 @@ class Bot(commands.Bot):
 
 
 ## bot handling / instantiate
-bot = Bot
+bot = Bot()
 handler = logging.FileHandler(filename='discord.log', encoding='utf-8', mode='w')
 
 ## token
