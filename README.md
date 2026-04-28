@@ -1,12 +1,15 @@
 ## Discord bot
 
 Just a random bot with:
+- Racism filter
+- Join / Leave messages
+- Avatar command
 
+Coming soon <!>
 - Money
-- Join message
-- Chat filter
-
-More features soon <!>
+- Latency
+- Dice roll games -> money -> banking
+- Daily commands / time cooldown commands
 
 
 
