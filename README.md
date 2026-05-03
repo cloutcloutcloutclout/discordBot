@@ -1,9 +1,33 @@
 ## Discord bot
 
 Just a random bot with:
+- Racism filter
+- Join / Leave messages
+- Avatar command
 
+Coming soon <!>
 - Money
-- Join message
-- Chat filter
+- Latency
+- Dice roll games -> money -> banking
+- Daily commands / time cooldown commands
 
-More features soon <!>
+
+
+
+### Notes
+
+#### Quick Cog Syntax Guide
+Command Decorators
+@bot.command()  —>  @commands.command()
+
+Event Listeners
+@bot.event  —>  @commands.Cog.listener()
+
+Function Definitions
+async def setup(ctx):  —>  async def setup(self, ctx):
+
+Bot References
+bot.user  —>  self.bot.user
+
+Variable Storage
+points = 0  —>  self.points = 0
