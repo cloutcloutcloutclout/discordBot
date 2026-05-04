@@ -1,9 +1,10 @@
 ## Discord bot
 
-Just a random bot with:
+Bot features:
 - Racism filter
 - Join / Leave messages
 - Avatar command
+- Banking {User Bank}
 
 Coming soon <!>
 - Money
