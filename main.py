@@ -18,27 +18,29 @@ class Bot(commands.Bot):
         intents.members = True
     
         super().__init__(command_prefix="$", intents=intents) ## cmd prefix
-        Bot.db = Database()
 
-        async def init_db():
-            async with aiosqlite.connect("user_bank.db") as db:
-                await db.execute("""
-                    CREATE TABLE IF NOT EXISTS users (
-                    user_id INTEGER PRIMARY KEY,
-                    xp INTEGER DEFAULT 0,
-                    level INTEGER DEFAULT 1,
-                    balance INTEGER DEFAULT 0,
-                    warnings INTEGER DEFAULT 0
-                     )
-                     """)
-                await db.commit()
+    async def init_db(self):
+        async with aiosqlite.connect("user_bank.db") as db:
+            await db.execute("""
+                CREATE TABLE IF NOT EXISTS users (
+                user_id INTEGER PRIMARY KEY,
+                xp INTEGER DEFAULT 0,
+                level INTEGER DEFAULT 1,
+                balance INTEGER DEFAULT 0,
+                warnings INTEGER DEFAULT 0
+                 )
+                 """)
+            await db.commit()
 
-        async def setup_hook(self):
-            # load .py files into cogs folder
-            for filename in os.listdir('./cogs'):
-                if filename.endswith('.py'):
-                    await self.load_extension(f'cogs.{filename[:-3]}')
-                    print(f'Loaded Cog: {filename}')
+    async def setup_hook(self):
+        # load db setup
+        await self.init_db()
+
+        # load .py files into cogs folder
+        for filename in os.listdir('./cogs'):
+            if filename.endswith('.py'):
+                await self.load_extension(f'cogs.{filename[:-3]}')
+                print(f'Loaded Cog: {filename}')
 
     async def on_ready(self):
         print(f"{self.user.name} is online.")
